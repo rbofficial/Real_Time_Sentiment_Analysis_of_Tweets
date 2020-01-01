@@ -41,6 +41,18 @@ all_tweets_no_url = [remove_url(tweet) for tweet in tweet_list]
 
 # calculating the sentiment value of each tweet
 sentiment_objects = [TextBlob(tweet) for tweet in all_tweets_no_url]
+sentiment_values = [[tweet.sentiment.polarity, str(tweet)] for tweet in sentiment_objects]
+sentiment_df = DataFrame(sentiment_values, columns=["polarity", "tweet"])
+sentiment_df.head()
+figure, axi = plt.subplots(figsize=(8, 6))
+
+# Plot histogram of the polarity values
+sentiment_df.hist(bins=[-1, -0.75, -0.5, -0.25, 0.25, 0.5, 0.75, 1],
+             ax=axi,
+             color="purple")
+plt.title("Overall Sentiment of Tweets")
+
+
 dict_sv= {}
 for tweet in sentiment_objects:
     dict_sv.update({str(tweet) : tweet.sentiment.polarity})
