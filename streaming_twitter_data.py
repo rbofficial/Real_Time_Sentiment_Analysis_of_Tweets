@@ -25,7 +25,7 @@ def authenticate_twitter_app():
 def search(auth,search_words):
     api = API(auth, wait_on_rate_limit=True)
     # will return first 10,000 tweets
-    tweets = Cursor(api.search, q=search_words, lang="en").items(5000)
+    tweets = Cursor(api.search, q=search_words, lang="en").items(10000)
     return tweets
 
 
